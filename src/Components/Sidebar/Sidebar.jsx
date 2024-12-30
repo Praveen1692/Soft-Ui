@@ -22,7 +22,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-64 bg-white shadow-lg">
+    <div className="w-64 bg-gray-200 text-white-800  shadow-lg">
       {/* Header */}
       <div className="flex items-center gap-2 p-5 border-b">
         <div className="p-2 border rounded-lg">

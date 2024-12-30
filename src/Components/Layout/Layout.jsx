@@ -1,8 +1,10 @@
-import React from "react";
-import Navbar from "../Navbar/Navbar";
-import Sidebar from "../Sidebar/Sidebar";
+import React from 'react'
+import Navbar from '../Navbar/Navbar'
+import Sidebar from '../Sidebar/Sidebar'
+import Dashboars from '../../Pages/Dashboard/Dashboars'
+import Error from '../../Pages/Error/Error'
 
-const HomePage = () => {
+function Layout({children}) {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -19,16 +21,13 @@ const HomePage = () => {
 
         {/* Main content area */}
         <main className="pt-16 px-6 pb-6 min-h-screen">
-          {/* Your page content goes here */}
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-2xl font-semibold text-gray-800">
-              This is main content under the home page
-            </h1>
+            {children}
           </div>
         </main>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default Layout

@@ -2,14 +2,8 @@ import React from "react";
 import { Search, LayoutDashboard, Menu } from "lucide-react";
 
 const Navbar = () => {
-  const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Pages", href: "#" },
-    { name: "Default", href: "#" },
-  ];
-
   return (
-    <nav className="bg-white shadow-sm w-[1027px] ml-auto">
+    <nav className="bg-gray-200 shadow-sm w-[1027px] ml-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo and Brand */}
