@@ -1,25 +1,36 @@
-import React from 'react';
-import { Music, Battery, Navigation } from 'lucide-react';
+import React from "react";
+import { Music, Battery, Navigation } from "lucide-react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+
 import Car from "../../assets/Images/car.jpg";
 
 const Automative = () => {
+  const mapStyles = {
+    height: "250px",
+    width: "100%",
+  };
+
+  const defaultCenter = {
+    lat: 41.3851,
+    lng: 2.1734,
+  };
   return (
     <div className="p-6 max-w-6xl mx-auto">
       {/* Header Section */}
 
-
-
       {/* Main Car Status Section */}
       <div className="bg-blue-100 rounded-xl p-8 mb-6 flex justify-between items-center">
         <div className="space-y-4">
-          <h2 className="text-2xl font-semibold text-gray-700">Since Last Charge</h2>
-          
+          <h2 className="text-2xl font-semibold text-gray-700">
+            Since Last Charge
+          </h2>
+
           <div className="space-y-2">
             <div>
               <div className="text-4xl font-bold">145</div>
               <div className="text-gray-600">Km</div>
             </div>
-            
+
             <div>
               <div className="text-4xl font-bold">300</div>
               <div className="text-gray-600">Kw Average Energy</div>
@@ -28,29 +39,19 @@ const Automative = () => {
         </div>
 
         <div className="relative h-64 lg:h-auto">
-            {/* <Image
+          {/* <Image
               src="/placeholder.svg"
               alt="Mercedes EQC"
               fill
               className="object-contain"
               priority
             /> */}
-            <img src={Car} alt="Car" className="w-full fill h-full object-contain rounded-lg" />
-
-
-
-          </div>
-
-
-
-
-
-
-
-
-
-
-
+          <img
+            src={Car}
+            alt="Car"
+            className="w-full fill h-full object-contain rounded-lg"
+          />
+        </div>
 
         <div className="text-right space-y-2">
           <div className="text-2xl font-semibold">Nearest Charger</div>
@@ -72,8 +73,6 @@ const Automative = () => {
             <div className="text-2xl font-bold">145 Km</div>
           </div>
           <Navigation className="w-8 h-8 text-white bg-gray-800 border-2 border-gray-400  shadow-md hover:bg-gray-700 hover:border-gray-500 hover:scale-110 transition-all" />
-
-
         </div>
 
         <div className="bg-blue-100 p-4 rounded-xl flex justify-between items-center">
@@ -121,25 +120,31 @@ const Automative = () => {
             <div className="text-gray-400">Estimated arrival time</div>
           </div>
           <div>
-            <div className="text-3xl font-bold">2.4<span className="text-sm">Km</span></div>
+            <div className="text-3xl font-bold">
+              2.4<span className="text-sm">Km</span>
+            </div>
             <div className="text-gray-400">Turn right in 2.4 miles</div>
           </div>
           <div>
-            <div className="text-3xl font-bold">6.3<span className="text-sm">Km</span></div>
+            <div className="text-3xl font-bold">
+              6.3<span className="text-sm">Km</span>
+            </div>
             <div className="text-gray-400">Distance to Creative Tim</div>
           </div>
         </div>
 
         {/* Map Placeholder */}
         <div className="h-64 bg-gray-800 rounded-lg mb-4">
-
-
-          <img src="/api/placeholder/1200/400" alt="Map" className="w-full h-full object-cover rounded-lg" />
-          <h1>Map integrated</h1>
-
-
-
-
+          {/* <img src="/api/placeholder/1200/400" alt="Map" className="w-full h-full object-cover rounded-lg" /> */}
+          <LoadScript googleMapsApiKey="AIzaSyC9N3fsCngn5vE7c00OEoRzwqjGvlrZ_ds">
+            <GoogleMap
+              mapContainerStyle={mapStyles}
+              zoom={13}
+              center={defaultCenter}
+            >
+              <Marker position={defaultCenter} />
+            </GoogleMap>
+          </LoadScript>
         </div>
 
         {/* Music Player */}
@@ -147,7 +152,9 @@ const Automative = () => {
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-500" />
             <div>
-              <div className="font-semibold">You're Mines Still (feat Drake)</div>
+              <div className="font-semibold">
+                You're Mines Still (feat Drake)
+              </div>
               <div className="text-gray-400">Yung Bleu - Hip-Hop</div>
             </div>
           </div>
