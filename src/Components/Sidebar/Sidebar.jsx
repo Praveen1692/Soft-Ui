@@ -20,18 +20,18 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const dashboardItems = [
-    { name: 'Default', icon: <Home size={20} /> },
-    { name: 'Automotive', icon: <Car size={20} /> },
-    { name: 'Smart Home', icon: <Home size={20} /> },
-    { name: 'Virtual Reality', icon: <Headphones size={20} /> },
-    { name: 'CRM', icon: <Users size={20} /> },
+    { name: 'Default', icon: <Home size={20} />, path: '/dashboard' },
+    { name: 'Automotive', icon: <Car size={20} />, path: '/automotive' },
+    { name: 'Smart Home', icon: <Home size={20} />, path: '/smart-home' },
+    { name: 'Virtual Reality', icon: <Headphones size={20} />, path: '/virtual-reality' },
+    { name: 'CRM', icon: <Users size={20} />, path: '/crm' },
   ];
 
   const menuItems = [
-    { name: 'Pages', icon: <LayoutDashboard size={20} /> },
-    { name: 'Applications', icon: <Settings size={20} /> },
-    { name: 'Ecommerce', icon: <ShoppingCart size={20} /> },
-    { name: 'Authentication', icon: <Lock size={20} /> },
+    { name: 'Pages', icon: <LayoutDashboard size={20} />, path: '/pages' },
+    { name: 'Applications', icon: <Settings size={20} />, path: '/applications' },
+    { name: 'Ecommerce', icon: <ShoppingCart size={20} />, path: '/ecommerce' },
+    { name: 'Authentication', icon: <Lock size={20} />, path: '/authentication' },
   ];
 
   const toggleMobileSidebar = () => {
@@ -45,7 +45,7 @@ const Sidebar = () => {
         <div className="p-2 border rounded-lg">
           <LayoutDashboard className="text-purple-600" size={20} />
         </div>
-        <span className="font-semibold text-gray-800">Soft UI Dashboard PROO</span>
+        <span className="font-semibold text-gray-800">Soft UI Dashboard PRO</span>
       </div>
 
       {/* Dashboard Section */}
@@ -71,7 +71,7 @@ const Sidebar = () => {
                 key={index}
                 className="flex items-center gap-3 p-2 my-1 text-gray-600 hover:bg-gray-100 rounded-lg cursor-pointer"
                 onClick={() => {
-                  navigate('/dashboard');
+                  navigate(item.path);
                   setIsMobileOpen(false);
                 }}
               >
@@ -90,7 +90,10 @@ const Sidebar = () => {
           <div
             key={index}
             className="flex items-center gap-3 p-2 my-1 text-gray-600 hover:bg-gray-100 rounded-lg cursor-pointer"
-            onClick={() => setIsMobileOpen(false)}
+            onClick={() => {
+              navigate(item.path);
+              setIsMobileOpen(false);
+            }}
           >
             <div className="text-gray-400">{item.icon}</div>
             <span className="text-sm">{item.name}</span>

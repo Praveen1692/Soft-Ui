@@ -15,38 +15,48 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
+import Chart from "../../Components/Charts/Chart";
 import Canvas from "../../Components/Canvas/Canvas";
 
 const StatsCard = ({ title, value, percentageChange, icon: Icon }) => (
-  <div className="bg-white p-4 rounded-lg shadow-sm">
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-gray-600 text-sm">{title}</p>
-        <h3 className="text-2xl font-semibold mt-1">{value}</h3>
-      </div>
-      <div
-        className={`p-3 rounded-full ${
-          title === "Today's Money" ? "bg-pink-100" : "bg-gray-100"
-        }`}
-      >
-        <Icon
-          className={`w-6 h-6 ${
-            title === "Today's Money" ? "text-pink-600" : "text-gray-600"
+  <div
+    className="relative bg-white p-2 rounded-xl shadow-sm overflow-hidden"
+    style={{ width: "200px", height: "90px" }}
+  >
+    <div className="relative z-10">
+      <div className="flex justify-between items-start mb-2">
+        <div>
+          <p className="text-gray-600 text-sm font-medium">{title}</p>
+          <h3 className="text-2xl font-bold mt-1">{value}</h3>
+          <span
+            className={`text-sm font-medium ${
+              parseInt(percentageChange) >= 0
+                ? "text-green-500"
+                : "text-red-500"
+            }`}
+          >
+            {percentageChange}
+          </span>
+        </div>
+        <div
+          className={`p-3 rounded-xl ${
+            title === "Today's Money" ? "bg-pink-600" : "bg-violet-600"
           }`}
-        />
+        >
+          <Icon className="w-6 h-6 text-white" />
+        </div>
+      </div>
+      <div className="flex items-center border-t pt-2 border-gray-100">
+        <ChevronUp className="w-4 h-4 text-green-500" />
       </div>
     </div>
-    <div className="mt-2 flex items-center">
-      <ChevronUp className="w-4 h-4 text-green-500" />
-      <span className="text-green-500 text-sm ml-1">{percentageChange}</span>
-    </div>
+    <div className="absolute -right-6 -top-6 w-32 h-32 bg-gradient-to-br from-pink-500/30 to-violet-500/30 blur-2xl rounded-full" />
   </div>
 );
 
 const CountryRow = ({ flag, country, sales, value, bounce }) => (
-  <div className="flex items-center justify-between py-3 border-b border-gray-100">
-    <div className="flex items-center space-x-3">
+  <div className="flex items-center justify-between p-2  border-b border-gray-100 shadow-sm overflow-hidden">
+    <div className="flex  items-center">
       <span className="text-xl">{flag}</span>
       <div>
         <p className="text-sm text-gray-600">Country:</p>
@@ -91,15 +101,20 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6 relative">
       {/* Dotted Globe */}
-      <div className="absolute right-30 top-20 -z-10 opacity-30 pointer-events-none">
-        {/* <Canvas /> */}
+      <div className="absolute right-30 top-20 -z-10 opacity-30 pointer-events-none"></div>
+
+      {/*Canvas*/}
+      <div className="position-relative mt-10 mb-10 ml-60 w-50 h-52 absolute inset-0  z-0">
+        <Canvas />
       </div>
 
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">General Statistics</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">
+          General Statistics
+        </h1>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
           <StatsCard
             title="Today's Money"
             value="$53,000"
@@ -127,7 +142,7 @@ const Dashboard = () => {
         </div>
 
         {/* Sales by Country */}
-        <div className="bg-white rounded-lg shadow-sm p-4 m-4">
+        <div className="bg-gray-200 rounded-lg shadow-sm p-0 mt-8 mb-6 max-w-lg shadow-sm overflow-hidden relative z-10">
           <h2 className="text-lg font-semibold mb-4">Sales by Country</h2>
           <CountryRow
             flag="🇺🇸"
@@ -159,17 +174,20 @@ const Dashboard = () => {
           />
         </div>
 
+        {/* Bar Chart */}
+
         {/* Charts Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Active Users */}
           <div className="bg-white rounded-lg shadow-sm p-6">
+            <Chart />
             <h2 className="text-lg font-semibold mb-4">Active Users</h2>
             <p className="text-sm text-gray-600 mb-4">(+23%) than last week</p>
-            <div className="grid grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-4 gap-4">
               {activeUsers.map((item) => (
                 <div key={item.title} className="text-center">
-                  <item.icon className="w-6 h-6 mx-auto mb-2 text-gray-600" />
-                  <p className="text-sm font-medium">{item.value}</p>
+                  <item.icon className="w-6 h-6 mx-auto mb-2 text-gray-600 bg-pink-600" />
+                  <p className="text-xl font-bold">{item.value}</p>
                 </div>
               ))}
             </div>
