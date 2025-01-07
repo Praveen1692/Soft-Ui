@@ -6,7 +6,7 @@ import Error from "./Pages/Error/Error";
 import Layout from "./Components/Layout/Layout";
 import Chart from "./Components/Charts/Chart";
 import Automotive from "./Components/Automotive/Automotive";
-import SmartHome from "./Components/Smart Home/SmartHome.jSx";
+import SmartHome from "./Components/Smart Home/SmartHome"
 
 
 function App() {
