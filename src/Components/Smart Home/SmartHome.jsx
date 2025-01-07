@@ -1,6 +1,10 @@
 import React from 'react';
 
+
 const SmartHome = () => {
+  const key=import.meta.env.VITE_API_KEY;
+  console.log("key",key);
+  
   return (
     <div className="p-6">
       {/* Camera Controls */}

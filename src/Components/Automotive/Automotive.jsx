@@ -5,6 +5,8 @@ import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Car from "../../assets/Images/car.jpg";
 
 const Automative = () => {
+  const key=import.meta.env.VITE_API_KEY;
+  
   const mapStyles = {
     height: "250px",
     width: "100%",
@@ -136,7 +138,7 @@ const Automative = () => {
         {/* Map Placeholder */}
         <div className="h-64 bg-gray-800 rounded-lg mb-4">
           {/* <img src="/api/placeholder/1200/400" alt="Map" className="w-full h-full object-cover rounded-lg" /> */}
-          <LoadScript googleMapsApiKey="AIzaSyC9N3fsCngn5vE7c00OEoRzwqjGvlrZ_ds">
+          <LoadScript googleMapsApiKey={key}>
             <GoogleMap
               mapContainerStyle={mapStyles}
               zoom={13}
