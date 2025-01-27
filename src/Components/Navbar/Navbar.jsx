@@ -19,7 +19,7 @@ const Navbar = () => {
                 Dashboard PRO
               </span>
               {/* Mobile menu button */}
-              <button
+               <button
                 onClick={toggleMenu}
                 className="md:hidden ml-2 text-gray-600 hover:text-gray-900"
               >
@@ -28,7 +28,7 @@ const Navbar = () => {
                 ) : (
                   <Menu className="h-6 w-6" />
                 )}
-              </button>
+              </button> 
             </div>
           </div>
 

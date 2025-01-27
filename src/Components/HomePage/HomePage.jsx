@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="fixed top-0 left-0 h-screen w-64 bg-white shadow-lg">
+      <aside className="fixed top-0 left-20 h-screen w-64 bg-white shadow-lg">
         <Sidebar />
       </aside>
 

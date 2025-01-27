@@ -1,6 +1,7 @@
 import React from 'react'
 import { Droplets, Thermometer, Wind, Lightbulb, Wifi, Plus } from 'lucide-react';
 
+
 function DeviceCard({ title, icon: Icon, isActive, lastActive, onClick }) {
   return (
     <div className={`p-6 rounded-xl shadow-sm ${isActive ? 'bg-gradient-to-br from-pink-500 to-purple-600 text-white' : 'bg-white'}`}>
