@@ -37,7 +37,7 @@ const StatsCard = ({ title, value, percentageChange, icon: Icon }) => (
         </div>
         <div
           className={`p-2 md:p-3 rounded-xl ${
-            title === "Today's Money" ? "bg-pink-600" : "bg-violet-600"
+            title === "Today's Money" ? "bg-pink-600" : "bg-pink-600"
           }`}
         >
           <Icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
@@ -99,123 +99,129 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6 relative overflow-hidden">
-      {/* Canvas - Hidden on mobile */}
-      <div className="absolute top-0 right-0 w-full h-[400px] md:h-[500px] overflow-hidden pointer-events-none">
-        <div className="relative w-full h-full max-w-7xl mx-auto">
-          <Canvas />
-        </div>
-      </div>
-
       <div className="relative max-w-7xl mx-auto">
         <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">
           General Statistics
         </h1>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <StatsCard
-            title="Today's Money"
-            value="$53,000"
-            percentageChange="+55%"
-            icon={DollarSign}
-          />
-          <StatsCard
-            title="New Clients"
-            value="+3,462"
-            percentageChange="-2%"
-            icon={Users}
-          />
-          <StatsCard
-            title="Today's Users"
-            value="2,300"
-            percentageChange="+3%"
-            icon={Users}
-          />
-          <StatsCard
-            title="Sales"
-            value="$103,430"
-            percentageChange="+5%"
-            icon={DollarSign}
-          />
-        </div>
-
-        {/* Sales by Country */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mt-6 md:mt-8 mb-6">
-          <h2 className="text-lg font-semibold mb-4">Sales by Country</h2>
-          <div className="overflow-x-auto">
-            <div className="min-w-full">
-              <CountryRow
-                flag="🇺🇸"
-                country="United States"
-                sales="2500"
-                value="230,900"
-                bounce="29.9"
+        {/* Main Content Container */}
+        <div className="flex flex-col lg:flex-row gap-4">
+          {/* Stats Grid Section - Left Half */}
+          <div className="w-full lg:w-1/2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <StatsCard
+                title="Today's Money"
+                value="$53,000"
+                percentageChange="+55%"
+                icon={DollarSign}
               />
-              <CountryRow
-                flag="🇩🇪"
-                country="Germany"
-                sales="3,900"
-                value="440,000"
-                bounce="40.22"
+              <StatsCard
+                title="New Clients"
+                value="+3,462"
+                percentageChange="-2%"
+                icon={Users}
               />
-              <CountryRow
-                flag="🇬🇧"
-                country="Great Britain"
-                sales="1,400"
-                value="190,700"
-                bounce="23.44"
+              <StatsCard
+                title="Today's Users"
+                value="2,300"
+                percentageChange="+3%"
+                icon={Users}
               />
-              <CountryRow
-                flag="🇧🇷"
-                country="Brasil"
-                sales="562"
-                value="143,960"
-                bounce="32.14"
+              <StatsCard
+                title="Sales"
+                value="$103,430"
+                percentageChange="+5%"
+                icon={DollarSign}
               />
             </div>
-          </div>
-        </div>
 
-        {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Active Users */}
-          <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
-            <div className="h-64 mb-4">
-              <Chart />
-            </div>
-            <h2 className="text-lg font-semibold mb-2">Active Users</h2>
-            <p className="text-sm text-gray-600 mb-4">(+23%) than last week</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {activeUsers.map((item) => (
-                <div key={item.title} className="text-center">
-                  <item.icon className="w-6 h-6 mx-auto mb-2 text-gray-600" />
-                  <p className="text-lg md:text-xl font-bold">{item.value}</p>
-                  <p className="text-sm text-gray-600">{item.title}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Sales Overview */}
-          <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
-            <h2 className="text-lg font-semibold mb-2">Sales Overview</h2>
-            <p className="text-sm text-gray-600 mb-4">4% more in 2021</p>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line
-                    type="monotone"
-                    dataKey="value"
-                    stroke="#E91E63"
-                    strokeWidth={2}
-                    dot={false}
+            {/* Sales by Country */}
+            <div className="bg-white rounded-lg shadow-sm p-4 mt-6">
+              <h2 className="text-lg font-semibold mb-4">Sales by Country</h2>
+              <div className="overflow-x-auto">
+                <div className="min-w-full">
+                  <CountryRow
+                    flag="🇺🇸"
+                    country="United States"
+                    sales="2500"
+                    value="230,900"
+                    bounce="29.9"
                   />
-                </LineChart>
-              </ResponsiveContainer>
+                  <CountryRow
+                    flag="🇩🇪"
+                    country="Germany"
+                    sales="3,900"
+                    value="440,000"
+                    bounce="40.22"
+                  />
+                  <CountryRow
+                    flag="🇬🇧"
+                    country="Great Britain"
+                    sales="1,400"
+                    value="190,700"
+                    bounce="23.44"
+                  />
+                  <CountryRow
+                    flag="🇧🇷"
+                    country="Brasil"
+                    sales="562"
+                    value="143,960"
+                    bounce="32.14"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Canvas Section - Right Half */}
+          <div className="w-full lg:w-1/2 h-[600px]">
+            <Canvas />
+          </div>
+        </div>
+
+        {/* Rest of the content */}
+        <div className="mt-10">
+          {/* Charts Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Active Users */}
+            <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
+              <div className="h-64 mb-4">
+                <Chart />
+              </div>
+              <h2 className="text-lg font-semibold mb-2">Active Users</h2>
+              <p className="text-sm text-gray-600 mb-4">(+23%) than last week</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {activeUsers.map((item) => (
+                  <div key={item.title} className="text-center">
+                    <item.icon className="w-6 h-6 mx-auto mb-2 text-gray-600" />
+                    <p className="text-lg md:text-xl font-bold">{item.value}</p>
+                    <p className="text-sm text-gray-600">{item.title}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Sales Overview */}
+            <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
+              <h2 className="text-lg font-semibold mb-2">Sales Overview</h2>
+              <p className="text-sm text-gray-600 mb-4">4% more in 2021</p>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={chartData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line
+                      type="monotone"
+                      dataKey="value"
+                      stroke="#E91E63"
+                      strokeWidth={2}
+                      dot={false}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>

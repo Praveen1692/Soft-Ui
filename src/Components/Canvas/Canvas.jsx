@@ -1,83 +1,80 @@
 import React, { useEffect, useRef } from 'react';
+import * as THREE from 'three';
 
 const Canvas = () => {
-  const canvasRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    console.log("Canvas");
-    
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const radius = 260; // Radius of the globe
-    const dotCount = 700; // Number of dots
-    const rotationSpeed = 0.005; // Speed of rotation
-    let angle = 0;
+    if (!containerRef.current) return;
 
-    // For high-resolution displays
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      60,
+      containerRef.current.clientWidth / containerRef.current.clientHeight,
+      0.1,
+      1000
+    );
 
-    const width = canvas.width;
-    const height = canvas.height;
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    renderer.setClearColor(0xffffff);
+    containerRef.current.appendChild(renderer.domElement);
 
-    const generateDots = () => {
-      let dots = [];
-      for (let i = 0; i < dotCount; i++) {
-        const theta = Math.random() * 2 * Math.PI;
-        const phi = Math.acos(2 * Math.random() - 1);
-        
-        const x = radius * Math.sin(phi) * Math.cos(theta);
-        const y = radius * Math.sin(phi) * Math.sin(theta);
-        const z = radius * Math.cos(phi);
-        
-        dots.push({ x, y, z });
-      }
-      return dots;
+    // Create larger globe
+    const sphereGeometry = new THREE.SphereGeometry(5, 64, 64);
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x808080,
+      wireframe: true,
+      wireframeLinewidth: 1
+    });
+
+    const sphere = new THREE.Mesh(sphereGeometry, material);
+    scene.add(sphere);
+
+    // Adjusted camera position
+    camera.position.z = 12;
+
+    // Animation loop
+    const animate = () => {
+      requestAnimationFrame(animate);
+      sphere.rotation.y += 0.005;
+      renderer.render(scene, camera);
     };
 
-    const dots = generateDots();
+    // Handle container resize
+    const handleResize = () => {
+      if (!containerRef.current) return;
 
-    const drawGlobe = () => {
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'gray-100';
+      const width = containerRef.current.clientWidth;
+      const height = containerRef.current.clientHeight;
 
-      dots.forEach((dot) => {
-        const xRotated = dot.x * Math.cos(angle) - dot.z * Math.sin(angle);
-        const zRotated = dot.x * Math.sin(angle) + dot.z * Math.cos(angle);
-        const scaleFactor = 500 / (500 + zRotated);
-
-        const x2D = (xRotated * scaleFactor) + width / 2;
-        const y2D = (dot.y * scaleFactor) + height / 2;
-
-        ctx.beginPath();
-        ctx.arc(x2D, y2D, 2 * scaleFactor, 0, 2 * Math.PI);
-        ctx.fill();
-      });
-
-      angle += rotationSpeed;
-      requestAnimationFrame(drawGlobe);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
     };
 
-    drawGlobe();
-    return () => cancelAnimationFrame(drawGlobe);
+    // Create ResizeObserver to watch container size changes
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(containerRef.current);
+
+    // Initial animation
+    animate();
+
+    // Cleanup
+    return () => {
+      resizeObserver.disconnect();
+      containerRef.current?.removeChild(renderer.domElement);
+      scene.clear();
+      renderer.dispose();
+    };
   }, []);
 
   return (
-    <div className="absolute inset-0 flex justify-center items-start pt-8 md:pt-16">
-      <canvas
-        ref={canvasRef}
-        width="700"
-        height="655"
-        className="w-full max-w-[400px] md:max-w-[600px]"
-        style={{
-          aspectRatio: '700/655'
-        }}
-      />
-    </div>
+    <div
+      ref={containerRef}
+      className="w-full h-full relative bg-gray-50"
+    />
   );
 };
 
