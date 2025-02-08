@@ -18,11 +18,11 @@ const Canvas = () => {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-    renderer.setClearColor(0xffffff);
+    renderer.setClearColor(0xF9FAFB);
     containerRef.current.appendChild(renderer.domElement);
 
     // Create larger globe
-    const sphereGeometry = new THREE.SphereGeometry(5, 64, 64);
+    const sphereGeometry = new THREE.SphereGeometry(5, 32, 32);
     const material = new THREE.MeshBasicMaterial({
       color: 0x808080,
       wireframe: true,
@@ -73,7 +73,7 @@ const Canvas = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full relative bg-gray-50"
+      className="w-full h-full relative"
     />
   );
 };

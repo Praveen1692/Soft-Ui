@@ -19,7 +19,7 @@ import Chart from "../../Components/Charts/Chart";
 import Canvas from "../../Components/Canvas/Canvas";
 
 const StatsCard = ({ title, value, percentageChange, icon: Icon }) => (
-  <div className="bg-white p-4 rounded-xl shadow-sm overflow-hidden relative w-full">
+  <div className="bg-white p-4 rounded-xl overflow-hidden relative w-full">
     <div className="relative z-10">
       <div className="flex justify-between items-start mb-2">
         <div>
@@ -99,14 +99,19 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6 relative overflow-hidden">
-      <div className="relative max-w-7xl mx-auto">
+      {/* Canvas Background */}
+      <div className="absolute top-0  w-5/6 inset-0 z-0 h-3/4" style={{ left: '20%' }}>
+        <Canvas />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto z-10">
         <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">
           General Statistics
         </h1>
 
         {/* Main Content Container */}
         <div className="flex flex-col lg:flex-row gap-4">
-          {/* Stats Grid Section - Left Half */}
+          {/* Stats Grid Section */}
           <div className="w-full lg:w-1/2">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <StatsCard
@@ -136,7 +141,7 @@ const Dashboard = () => {
             </div>
 
             {/* Sales by Country */}
-            <div className="bg-white rounded-lg shadow-sm p-4 mt-6">
+            <div className="bg-white rounded-lg p-4 mt-6">
               <h2 className="text-lg font-semibold mb-4">Sales by Country</h2>
               <div className="overflow-x-auto">
                 <div className="min-w-full">
@@ -172,11 +177,6 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-
-          {/* Canvas Section - Right Half */}
-          <div className="w-full lg:w-1/2 h-[600px]">
-            <Canvas />
-          </div>
         </div>
 
         {/* Rest of the content */}
@@ -184,7 +184,7 @@ const Dashboard = () => {
           {/* Charts Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Active Users */}
-            <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
+            <div className="bg-white rounded-lg p-4 md:p-6">
               <div className="h-64 mb-4">
                 <Chart />
               </div>
@@ -202,7 +202,7 @@ const Dashboard = () => {
             </div>
 
             {/* Sales Overview */}
-            <div className="bg-white rounded-lg shadow-sm p-4 md:p-6">
+            <div className="bg-white rounded-lg p-4 md:p-6">
               <h2 className="text-lg font-semibold mb-2">Sales Overview</h2>
               <p className="text-sm text-gray-600 mb-4">4% more in 2021</p>
               <div className="h-64">
