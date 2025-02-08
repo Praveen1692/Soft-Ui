@@ -100,7 +100,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6 relative overflow-hidden">
       {/* Canvas Background */}
-      <div className="absolute top-0  w-5/6 inset-0 z-0 h-3/4" style={{ left: '20%' }}>
+      <div className="absolute top-0  w-5/6 inset-0 z-0 h-1/2" style={{ left: '10%' }}>
         <Canvas />
       </div>
 
